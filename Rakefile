@@ -1,32 +1,32 @@
-namespace :greeting do
-  desc 'outputs hello from the terminal'
-  task :hello do
-    puts 'hello from Rake!'
-  end
+# namespace :greeting do
+#   desc 'outputs hello from the terminal'
+#   task :hello do
+#     puts 'hello from Rake!'
+#   end
 
-  desc 'outputs oh hi mark from terminal'
-  task :himark do
-    puts 'oh... hi mark.'
-  end
-end
+#   desc 'out puts YELLOW to the terminal'
+#   task :yellow do
+#     puts 'YELLOW!'
+#   end
+# end
 
-namespace :db do
-  desc 'migrate changes to your db'
-  task migrate: :environment do
-    Student.create_table
-  end
-
-  desc 'seed the database with dummy data'
-  task seed: :environment do
-    require_relative './db/seeds'
-  end
+desc 'drop into pry console'
+task console: :environment do
+  Pry.start
 end
 
 task :environment do
   require_relative './config/environment'
 end
 
-desc 'drop into the Pry console'
-task console: :environment do
-  Pry.start
+namespace :db do
+  desc 'migrate changes to your databases'
+  task migrate: :environment do
+    Student.create_table
+  end
+
+  desc 'seed the db with dummy data'
+  task seed: :environment do
+    require_relative './db/seeds'
+  end
 end
